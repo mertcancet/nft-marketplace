@@ -1,0 +1,52 @@
+.filter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 32px;
+  &__label {
+    color: #c3c4ca;
+    opacity: 0.5;
+    margin-right: 14px;
+    font-size: 19px;
+    line-height: 22px;
+  }
+}
+
+.dropdown {
+  position: relative;
+  color: #ffffff;
+  background-color: #080808;
+  padding: 15px;
+  width: 240px;
+  cursor: pointer;
+  &__close {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem);
+    transition: all 0.35s;
+  }
+  &__open {
+    color: #ffffff;
+    background-color: #080808;
+    padding: 12px;
+    margin-top: 8px;
+    width: 240px;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &__item {
+    padding: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: #ebd20050;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+  }
+}
