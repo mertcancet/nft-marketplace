@@ -3,7 +3,6 @@ import ElementIcon from 'components/ElementIcon'
 import styles from './Card.module.scss'
 
 const Card = ({ item }) => {
-  console.log(item)
   return (
     <div className={styles.card}>
       <img className={styles.image} src={item.image} alt="mock-image" />
