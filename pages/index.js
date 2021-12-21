@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
 
 import { Card, Container, Filter } from 'components'
 
@@ -7,7 +9,38 @@ import { useGetNftItems } from 'hooks'
 import styles from 'styles/screens/Home.module.scss'
 
 export default function Home() {
-  const { loading, error, data } = useGetNftItems()
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [pageNumber, setPageNumber] = useState(0)
+  const { loading, error, data } = useGetNftItems({
+    pageNumber,
+  })
+  const [pageData, setPageData] = useState(data?.cardEntities)
+
+  useEffect(() => {
+    if (data && !selectedCategory) {
+      setPageData(data.cardEntities)
+    }
+    if (data && selectedCategory) {
+      const filteredData = data.cardEntities?.filter(
+        item => item.category.name === selectedCategory.name
+      )
+      setPageData(filteredData)
+    }
+  }, [selectedCategory, data])
+
+  const loadMore = () => {
+    setPageNumber(prev => prev + 1)
+    // setPageData(prev => [...prev, data.cardEntities])
+  }
+
+  console.log('rerender')
+  const [sentryRef] = useInfiniteScroll({
+    loading,
+    hasNextPage: pageNumber < 3,
+    onLoadMore: loadMore,
+    disabled: !!error,
+    rootMargin: '0px 0px 20px 0px',
+  })
 
   if (error) return <span>Unexpected error occurred. Please try again </span>
   return (
@@ -25,14 +58,18 @@ export default function Home() {
           height="94"
         />
         <h1 className={styles.header}>NFT marketplace</h1>
-        <Filter />
+        <Filter
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         {loading ? (
           <span>Loading...</span>
         ) : (
           <div className={styles['card-wrapper']}>
-            {data?.cardEntities?.map(item => (
+            {pageData?.map(item => (
               <Card item={item} key={item.id} />
             ))}
+            {(loading || pageNumber < 3) && <div ref={sentryRef} />}
           </div>
         )}
       </Container>

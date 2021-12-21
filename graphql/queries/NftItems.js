@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 const GET_NFT_ITEMS = gql`
-  query GetNFTItems($offset: Int, $limit: Int) {
-    cardEntities(offset: $offset, limit: $limit) {
+  query GetNFTItems($first: Int) {
+    cardEntities(first: $first) {
       id
       owner
       description

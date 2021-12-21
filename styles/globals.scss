@@ -5,7 +5,7 @@ body {
   font-family: $ff-poppins;
   font-size: $fs-default;
   font-weight: $fw-default;
-  background: url("/images/background.png") no-repeat fixed center;
+  background: url('/images/background.png') no-repeat fixed center;
   background-size: cover;
   -webkit-font-smoothing: antialiased;
 }
@@ -24,8 +24,8 @@ a {
 }
 
 h1 {
-  color: #fff;
-  font-size: 64px;
+  color: $c-white;
+  font-size: $fs-x-large;
   line-height: 75px;
-  font-weight: 200;
+  font-weight: $fw-200;
 }

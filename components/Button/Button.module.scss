@@ -1,6 +1,6 @@
 .btn {
   padding: 10px 40px;
-  font-size: 13px;
+  font-size: $fs-medium;
   line-height: 20px;
   appearance: none;
   cursor: pointer;
@@ -9,24 +9,26 @@
   border: 1px solid transparent;
   &:disabled {
     background-color: #212121;
-    color: #c3c4ca;
+    color: $c-gray100;
   }
 }
+
 .primary {
-  background-color: #ebd200;
-  color: #030404;
+  background-color: $c-primary;
+  color: $c-black200;
   &:hover {
-    border: 1px solid #030404;
+    border: 1px solid $c-black200;
     transition: all 0.5s ease;
   }
 }
+
 .outline {
-  border: 1px solid #ffcf00;
-  color: #ebd200;
-  background-color: #030404;
+  border: 1px solid $c-primary;
+  color: $c-primary;
+  background-color: $c-black200;
   &:hover {
-    color: #030404;
-    background-color: #ebd200;
+    color: $c-black200;
+    background-color: $c-primary;
     transition: all 0.5s ease;
   }
 }
