@@ -61,8 +61,8 @@ export default function Home() {
           setSelectedCategory={setSelectedCategory}
         />
         <div className={styles['card-wrapper']}>
-          {pageData?.map(item => (
-            <Card item={item} key={item.id} />
+          {pageData?.map((item, i) => (
+            <Card item={item} key={i} />
           ))}
         </div>
       </Container>
