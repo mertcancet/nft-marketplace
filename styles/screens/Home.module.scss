@@ -21,3 +21,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.loading {
+  color: $c-white;
+  width: 100%;
+  text-align: center;
+  margin: 32px;
+}

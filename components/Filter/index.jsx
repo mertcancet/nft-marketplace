@@ -6,13 +6,15 @@ import { useGetCategories } from 'hooks'
 import styles from './Filter.module.scss'
 
 const Filter = ({ selectedCategory, setSelectedCategory }) => {
-  const [isDropdownOpen, setIsDropDownOpen] = useState(false)
   const { data, error } = useGetCategories()
+
+  const [isDropdownOpen, setIsDropDownOpen] = useState(false)
 
   const handleFilter = (item, index) => {
     setSelectedCategory({ ...item, index })
     setIsDropDownOpen(false)
   }
+
   return (
     <div className={styles.filter}>
       {!error && (

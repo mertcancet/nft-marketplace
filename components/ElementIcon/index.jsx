@@ -9,7 +9,7 @@ const elements = {
 const ElementIcon = ({ element }) => {
   return (
     <div>
-      <span>{elements[element]}</span>{' '}
+      <span>{elements?.[element]}</span>{' '}
     </div>
   )
 }

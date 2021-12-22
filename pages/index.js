@@ -3,18 +3,17 @@ import Head from 'next/head'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 
 import { Card, Container, Filter } from 'components'
-
 import { useGetNftItems } from 'hooks'
-
 import styles from 'styles/screens/Home.module.scss'
 
+const TOTAl_PAGE_NUMBER = 3
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState(null)
-  const [pageNumber, setPageNumber] = useState(0)
+  const [pageNumber, setPageNumber] = useState(1)
   const { loading, error, data } = useGetNftItems({
     pageNumber,
   })
   const [pageData, setPageData] = useState(data?.cardEntities)
+  const [selectedCategory, setSelectedCategory] = useState(null)
 
   useEffect(() => {
     if (data && !selectedCategory) {
@@ -30,16 +29,15 @@ export default function Home() {
 
   const loadMore = () => {
     setPageNumber(prev => prev + 1)
-    // setPageData(prev => [...prev, data.cardEntities])
+    setPageData(prev => [...prev, data.cardEntities])
   }
 
-  console.log('rerender')
   const [sentryRef] = useInfiniteScroll({
     loading,
-    hasNextPage: pageNumber < 3,
+    hasNextPage: pageNumber < TOTAl_PAGE_NUMBER,
     onLoadMore: loadMore,
     disabled: !!error,
-    rootMargin: '0px 0px 20px 0px',
+    rootMargin: '0px 0px 200px 0px',
   })
 
   if (error) return <span>Unexpected error occurred. Please try again </span>
@@ -62,17 +60,17 @@ export default function Home() {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        {loading ? (
-          <span>Loading...</span>
-        ) : (
-          <div className={styles['card-wrapper']}>
-            {pageData?.map(item => (
-              <Card item={item} key={item.id} />
-            ))}
-            {(loading || pageNumber < 3) && <div ref={sentryRef} />}
-          </div>
-        )}
+        <div className={styles['card-wrapper']}>
+          {pageData?.map(item => (
+            <Card item={item} key={item.id} />
+          ))}
+        </div>
       </Container>
+      {(loading || pageNumber < 3) && (
+        <div className={styles.loading} ref={sentryRef}>
+          Loading...
+        </div>
+      )}
     </div>
   )
 }

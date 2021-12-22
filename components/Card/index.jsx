@@ -11,7 +11,7 @@ const Card = ({ item }) => {
         <div className={styles.name}>
           <span className={styles.name__info}>{item.name}</span>
           <span className={styles.name__element}>
-            <ElementIcon element={item.category.name} />
+            <ElementIcon element={item.category?.name} />
           </span>
         </div>
         <div className={styles.detail}>
